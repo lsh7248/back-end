@@ -30,6 +30,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Application definition
 
+CORS_ALLOWED_ORIGINS = ['http://localhost:8080', 'http://127.0.0.1:8000']
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+DJOSER = {
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SET_PASSWORD_RETYPE': True,
+    'LOGOUT_ON_PASSWORD_CHANGE': True,
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+    'SERIALIZERS': {},
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,16 +62,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'taggit',
+    'rest_framework',
+    'djoser',
+    'rest_framework_simplejwt',
+    'corsheaders',
 
     'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
     'noticeBoard.apps.NoticeboardConfig',
+
+
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -115,10 +145,11 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
+# USE_L10N = True
 
 USE_TZ = False
 
-
+# DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S.%f'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 

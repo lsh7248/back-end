@@ -21,5 +21,7 @@ urlpatterns = [
 
     path('', views.HomeView.as_view(), name='home'),
     path('api/', include('api.urls')),
+    path('api/', include('djoser.urls')),
+    path('api/', include('djoser.urls.jwt')),
     path('notice/', include('noticeBoard.urls')),
 ]
