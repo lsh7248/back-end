@@ -51,9 +51,9 @@ class MyUserManager(BaseUserManager):
 
 class TimestampedModel(models.Model):
     # 생성된 날짜를 기록
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
     # 수정된 날짜를 기록
-    updated_at = models.DateTimeField(auto_now=True, blank=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
 
     class Meta:
         abstract = True
